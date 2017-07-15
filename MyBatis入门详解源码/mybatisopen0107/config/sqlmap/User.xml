@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 名称空间有特殊的用途 -->
+<mapper namespace="test">
+
+<!-- 查询用户信息
+select：将select标签内容称为statement
+id：是user.xml中的唯一标识 ，statement的id
+parameterType：指定向sql（向statement中）中传入参数的类型
+#{}：表示一个点位符，{}中的id表示传入变量名，当传入单个值｛｝中的变量名可以随意
+resultType：将sql查询结果集映射成java对象的类型
+ -->
+<select id="findUserByUsername" parameterType="string"
+resultType="cn.itcast.mybatis.po.User">
+   SELECT * FROM USER WHERE username = #{id}
+</select>
+
+<!-- 插入用户
+parameterType：指定输入参数类型，包括username,birthday,sex,address,detail,score
+#{username}：里边的username是cn.itcast.mybatis.po.User的属性
+
+ -->
+<insert id="insertUser" parameterType="cn.itcast.mybatis.po.User">
+  insert into user(username,birthday,sex,address,detail,score) 
+  values(#{username},#{birthday},#{sex},#{address},#{detail},#{score})
+</insert>
+
+</mapper>
